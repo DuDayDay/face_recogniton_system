@@ -1,0 +1,28 @@
+<!-- student_table_snippet.html -->
+{% load static %}
+<link rel="stylesheet" href= "{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/Mycss.css' %}">
+
+<table class="table" id="student_table">
+    <thead>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>识别时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in queryset %}
+        <tr>
+            <th scope="row">{{ item.StudentID }}</th>
+            <td>{{ item.name }}</td>
+            <td>{{ item.time }}</td>
+            <td>
+                <!-- 请确保这里的 URL 是正确的 -->
+                <a class="btn btn-danger btn-xs" href="{% url 'record_delete' item.id %}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

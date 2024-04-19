@@ -1,0 +1,48 @@
+{% extends 'container.html' %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                     <div class="col-sm-6 d-flex align-items-center">
+                        <div class="panel-title text-center" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                            <h2>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                添加学生个人信息</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
+                            <div style="width: 100px; height: 100px">
+                                <img src="#" alt="学生图像" class="img-thumbnail" style="width: 100%;">
+                            </div>
+                            <div class="text-center">学生图像</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">姓名:</label>
+                        <input type="text" class="form-control" name="name" placeholder="请输入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentId">学号:</label>
+                        <input type="text" class="form-control" name="studentId" placeholder="请输入学号">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">年龄:</label>
+                        <input type="text" class="form-control" name="age" placeholder="请输入年龄">
+                    </div>
+                    <div class="form-group">
+                        <label for="image" style="font-size: 18px;">导入图像:</label>
+                        <input type="file" class="form-control-file custom-file-input" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

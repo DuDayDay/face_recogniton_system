@@ -1,0 +1,45 @@
+{% extends 'container.html' %}
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                     <div class="col-sm-6 d-flex align-items-center">
+                        <div class="panel-title text-center" style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                            <h2>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                编辑查看个人信息</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
+                            <div style="width: 100px; height: 100px">
+                                {% load static %}
+                                <img src="{%  static path %}" alt="学生图像" class="img-thumbnail" style="width: 90%">
+                            </div>
+                            <div class="text-center" style="color: #122b40">学生图像</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">姓名:</label>
+                        <input type="text" class="form-control" name="name" placeholder="请输入姓名" value='{{ qurist.name }}' readonly >
+                    </div>
+                    <div class="form-group">
+                        <label for="studentId">学号:</label>
+                        <input type="text" class="form-control" name="studentId" placeholder="请输入学号" value="{{ qurist.StudentID}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">年龄:</label>
+                        <input type="text" class="form-control" name="age" placeholder="请输入年龄" value="{{ qurist.age }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">确定</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+
+{% extends 'container.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div style="margin-bottom: 10px">
+            <!-- 删除了提交按钮 -->
+        </div>
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            学生列表
+        </div>
+        <!-- Table -->
+        <table class="table" id="student_table">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>识别时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in queryset %}
+                <tr>
+                    <th scope="row">{{ item.StudentID }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" href="/Student/{{ item.id }}/RecordDelete/">删除</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // 页面加载时自动触发学生识别
+        startStudentDetection();
+
+        // 定义函数：开始学生识别
+        function startStudentDetection() {
+            $.ajax({
+                url: "{% url 'start_student_detection' %}",
+                type: "GET",
+                success: function (response) {
+                    console.log(response.message);
+                    updateStudentRecords(); // 学生识别成功后更新学生列表
+                }
+            });
+        }
+        function updateStudentRecords() {
+            $.ajax({
+                url: "{% url 'student_record_table_data' %}",  // 使用 Django 的 标签
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (response.table_html) {
+                        $('#student_table table').html(response.table_html);
+                    }
+                }
+            });
+        }
+        // 每隔5秒自动更新学生列表
+        setInterval(function () {
+            updateStudentRecords();
+        }, 2000);
+    });
+</script>
+
+{% endblock %}

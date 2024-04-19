@@ -1,0 +1,45 @@
+
+{% extends 'container.html' %}
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a href="/Student/add/" class="btn btn-primary">添加学生信息</a>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                学生列表
+            </div>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for itmes in queryset %}
+                <tr>
+
+                        <th scope="row">{{ itmes.id }}</th>
+                        <th>{{ itmes.StudentID }}</th>
+                        <td>{{ itmes.name }}</td>
+                        <td>{{ itmes.age }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/Student/{{ itmes.id }}/Edit/">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="/Student/{{ itmes.id }}/Delete/">删除</a>
+                        </td>
+                </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

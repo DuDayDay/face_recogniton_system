@@ -1,0 +1,12 @@
+.custom-file-input {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s;
+}
+
+.custom-file-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
